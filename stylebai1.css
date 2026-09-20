@@ -1,0 +1,42 @@
+body{
+    display: flex;
+    font-family: "Noto Serif", serif;
+}
+
+.khung{
+    width: 550px;
+    margin: auto;
+    padding: 25px;
+    background: #FFFDE7;
+    border: 1px solid #9E9E9E;
+    text-align: center;
+}
+
+h2{
+    margin: 0 0 3px;
+    background: #FFD9E6;
+    color: #D40000;
+    font-weight: bold;
+    padding: 3px 0;
+}
+
+.do,.xanh{
+    font-style: italic;
+    font-size: small;
+    line-height: 25px;
+}
+
+.xanh{
+    color: #0033CC;
+}
+
+.do{
+    color: #D40000;
+}
+
+hr{
+    color: #0033CC;
+    width: 300px;
+    text-align: center;
+    border: 1px solid ;
+}

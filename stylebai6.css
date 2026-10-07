@@ -1,0 +1,61 @@
+body{
+    font-family: 'Times New Roman', Times, serif;
+    width: 850px;
+    margin: auto;
+}
+
+.khung{
+    background-color: #FFF8E7;
+    width: 605px;
+    margin: 10px auto;
+    padding: 20px;
+}
+
+h2{
+    color: #E65100;
+    text-align: center;
+}
+
+.noidung{
+    display: flex;
+}
+
+.anh{
+    width: 190px;
+    text-align: center;
+}
+
+.anh img{
+    width: 170px;
+}
+
+.bang{
+    width: 405px;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 2px 2px 4px #ccc;
+}
+
+th{
+    background-color:  #E65100;
+    color: white;
+    padding: 7px;
+    text-align: left;
+}
+
+td{
+    padding: 6px;
+    border-bottom: 1px solid #E65100;
+}
+
+td:first-child{
+    text-align: center;
+    width: 4px;
+}
+
+tr:nth-child(even){
+    background-color: #FDF8EF;
+}

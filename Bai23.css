@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: #f1f4f9;
+  color: #1f2a44;
+  padding: 24px;
+}
+
+/* Tiêu đề */
+.tieu-de {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.tieu-de h1 {
+  font-size: 28px;
+  color: #1f2a44;
+}
+
+.tieu-de p {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #6b7a99;
+}
+
+/* Lưới ảnh: 3 cột, khoảng cách 16px */
+.luoi-anh {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Ô ảnh: bo góc, đổ bóng, ẩn phần ảnh tràn ra ngoài khi zoom */
+.o-anh {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  aspect-ratio: 16 / 10;
+}
+
+.o-anh img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* Hiệu ứng hover: phóng to ảnh */
+.o-anh:hover img {
+  transform: scale(1.12);
+}
+
+/* Lớp phủ tên: gradient từ trong suốt -> đen mờ, căn đáy ảnh */
+.o-anh figcaption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 28px 12px 10px;
+  color: #fff;
+  font-size: 13px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.75));
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+
+.o-anh:hover figcaption {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .luoi-anh {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .luoi-anh {
+    grid-template-columns: 1fr;
+  }
+}

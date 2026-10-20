@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e7eb;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Vỏ máy tính */
+.calculator {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  background: #111827;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Màn hình */
+.screen {
+  min-height: 120px;
+  margin-bottom: 20px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  background: #022c22;
+  color: #4ade80;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.expression {
+  min-height: 24px;
+  max-width: 100%;
+  font-family: "Courier New", monospace;
+  font-size: 20px;
+  letter-spacing: 2px;
+  opacity: 0.85;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.result {
+  max-width: 100%;
+  font-family: "Courier New", monospace;
+  font-size: 52px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+/* Bàn phím lưới 4 cột */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.btn {
+  height: 78px;
+  border: none;
+  border-radius: 10px;
+  font-size: 26px;
+  cursor: pointer;
+  transition: filter 0.15s, transform 0.1s;
+}
+
+.btn:hover {
+  filter: brightness(1.15);
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+}
+
+/* Nút số */
+.btn-num {
+  background: #25313f;
+  color: #e5e7eb;
+}
+
+/* Nút phép tính */
+.btn-op {
+  background: #0d6efd;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* Nút = và C */
+.btn-equal {
+  background: #16a34a;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.btn-clear {
+  background: #dc2626;
+  color: #ffffff;
+}
+
+/* Số 0 chiếm 2 cột */
+.btn-zero {
+  grid-column: span 2;
+}
+
+@media (max-width: 440px) {
+  .calculator { padding: 16px; }
+  .keypad { gap: 10px; }
+  .btn { height: 64px; font-size: 22px; }
+  .result { font-size: 40px; }
+}

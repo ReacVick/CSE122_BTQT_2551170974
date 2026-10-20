@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 12 - In lịch</title>
+    <link rel="stylesheet" href="Bai12.css">
+</head>
+<body>
+
+    <div class="calendar-container">
+        <div id="lblNam" class="year-text">2026</div>
+        <div id="lblThang" class="month-text">Tháng 12</div>
+        <div id="lblSoNgay" class="day-text">24</div>
+        <div id="lblThu" class="weekday-text">Thứ hai</div>
+
+        <div id="lblLoiChoi" class="greeting-text">Chào buổi sáng!</div>
+
+        <div class="form-box">
+            <div class="input-group">
+                <label for="txtNgay">Ngày</label>
+                <input type="number" id="txtNgay" value="24">
+            </div>
+            <div class="input-group">
+                <label for="txtThang">Tháng</label>
+                <input type="number" id="txtThang" value="12">
+            </div>
+            <div class="input-group">
+                <label for="txtNam">Năm</label>
+                <input type="number" id="txtNam" value="2026">
+            </div>
+            <button id="btnInLich" class="btn-print">In<br>lịch</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('btnInLich').addEventListener('click', function() {
+            let ngay = parseInt(document.getElementById('txtNgay').value);
+            let thang = parseInt(document.getElementById('txtThang').value) - 1; 
+            let nam = parseInt(document.getElementById('txtNam').value);
+
+            let dateObj = new Date(nam, thang, ngay);
+
+            if (isNaN(dateObj.getTime())) {
+                alert("Vui lòng nhập ngày tháng năm hợp lệ!");
+                return;
+            }
+
+            document.getElementById('lblNam').innerText = dateObj.getFullYear();
+
+            let tenThang = "Tháng " + (dateObj.getMonth() + 1);
+            document.getElementById('lblThang').innerText = tenThang;
+
+            document.getElementById('lblSoNgay').innerText = dateObj.getDate();
+
+            const daysOfWeek = ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"];
+            let tenThu = daysOfWeek[dateObj.getDay()];
+            document.getElementById('lblThu').innerText = tenThu;
+
+            let gio = new Date().getHours();
+            let loiChao = "";
+            
+            if (gio >= 4 && gio < 11) {
+                loiChao = "Chào buổi sáng!";
+            } else if (gio >= 11 && gio < 13) {
+                loiChao = "Chào buổi trưa!";
+            } else if (gio >= 13 && gio < 18) {
+                loiChao = "Chào buổi chiều!";
+            } else {
+                loiChao = "Chào buổi tối!";
+            }
+            
+            document.getElementById('lblLoiChoi').innerText = loiChao;
+        });
+    </script>
+
+</body>
+</html>

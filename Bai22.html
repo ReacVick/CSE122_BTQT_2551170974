@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài 22 - Chế độ Tối / Sáng</title>
+  <link rel="stylesheet" href="bai22.css">
+</head>
+<body>
+  <div class="khung">
+    <header class="dau-trang">
+      <h1>Chế độ Tối / Sáng</h1>
+      <label class="nut-gat" aria-label="Đổi giao diện Sáng/Tối">
+        <input type="checkbox" id="nutDoi">
+        <span class="thanh"></span>
+      </label>
+    </header>
+
+    <section class="the">
+      <h2>Biến CSS (CSS Variables)</h2>
+      <p>Toàn bộ màu sắc được khai báo trong <code>:root</code> và ghi đè bằng class <code>.toi</code>.</p>
+    </section>
+
+    <section class="the">
+      <h2>Chuyển đổi bằng JavaScript</h2>
+      <p>Nút gạt thêm/bỏ class <code>.toi</code> trên <code>&lt;body&gt;</code> — mọi thành phần tự đổi màu.</p>
+    </section>
+
+    <section class="the">
+      <h2>Chuyển màu mượt</h2>
+      <p>Dùng <code>transition</code> để màu nền và chữ chuyển dần, không bị giật.</p>
+    </section>
+
+    <p class="trang-thai" id="trangThai">Đây là giao diện ở chế độ SÁNG (đang tắt).</p>
+  </div>
+
+  <script>
+    const nut = document.getElementById('nutDoi');
+    const trangThai = document.getElementById('trangThai');
+
+    nut.addEventListener('change', function () {
+      // Thêm/bỏ class .toi trên <body>
+      document.body.classList.toggle('toi', nut.checked);
+      trangThai.textContent = nut.checked
+        ? 'Đây là giao diện ở chế độ TỐI (đang bật).'
+        : 'Đây là giao diện ở chế độ SÁNG (đang tắt).';
+    });
+  </script>
+</body>
+</html>

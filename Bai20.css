@@ -1,0 +1,99 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  background: #0f1417;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== Khung ảnh ===== */
+.frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px 40px;
+  background: #1c2226;
+  border-radius: 12px;
+  min-width: 420px;
+}
+
+.frame img {
+  height: 120px;
+  width: auto;
+  display: block;
+  transition: all 0.4s ease;
+}
+
+/* ===== Dòng chữ ===== */
+.caption {
+  font-size: 32px;
+  font-style: italic;
+  font-weight: 500;
+  background: linear-gradient(90deg, #f7d774, #d4a017, #fff1a8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ===== Thanh nút ===== */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 560px;
+}
+
+.toolbar button {
+  padding: 6px 14px;
+  background: #232b30;
+  color: #fff;
+  border: 1px solid #3a444a;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.toolbar button:hover {
+  background: #2f3a41;
+}
+
+.toolbar button.active {
+  background: #0d6efd;
+  border-color: #0d6efd;
+}
+
+/* ===== Các hiệu ứng ảnh ===== */
+.fx-gray        { filter: grayscale(1); }
+.fx-xray        { filter: grayscale(1) invert(1); }
+.fx-invert      { filter: invert(1); }
+
+.fx-fliph       { transform: scaleX(-1); }
+.fx-flipv       { transform: scaleY(-1); }
+
+.fx-glow        { filter: drop-shadow(0 0 8px #ff4d6d) drop-shadow(0 0 18px #ff8fa3); }
+.fx-shadow      { filter: drop-shadow(4px 4px 6px rgba(0, 0, 0, 0.9)); }
+.fx-bold-shadow { filter: drop-shadow(8px 8px 0 #000) drop-shadow(10px 10px 0 #555); }
+.fx-dropshadow  { filter: drop-shadow(0 10px 8px rgba(255, 255, 255, 0.45)); }
+
+.fx-blur        { filter: blur(3px); }
+
+.fx-wave        { filter: url(#wave); }
+
+.fx-mask {
+  -webkit-mask-image: radial-gradient(circle, #000 45%, transparent 72%);
+  mask-image: radial-gradient(circle, #000 45%, transparent 72%);
+}
+
+.fx-alpha       { opacity: 0.4; }

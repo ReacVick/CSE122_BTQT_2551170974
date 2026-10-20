@@ -1,0 +1,95 @@
+
+body {
+    background-image: url('c:\Users\admin\Documents\Gui_SV_BTTH\Anh\Bai12\Nen.gif');
+    background-repeat: repeat;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Ô lịch chung */
+.calendar-container {
+    border: 1px solid #ccc;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Năm / Tháng / Thứ / Lời chào */
+.year-text {
+    color: #C62828;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.month-text, .weekday-text {
+    color: #1565C0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.day-text {
+    color: #C62828;
+    font-size: 52px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.greeting-text {
+    color: #C62828;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+/* Form nhập */
+.form-box {
+    border: 2px solid #1565C0;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.input-group input {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Nút In lịch */
+.btn-print {
+    background-color: #455A64;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-print:hover {
+    background-color: #37474F;
+}

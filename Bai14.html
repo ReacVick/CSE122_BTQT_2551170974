@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>6 kỳ quan thiên nhiên Việt Nam</title>
+<link rel="stylesheet" href="Bai14.css">
+</head>
+<body>
+  <div class="container">
+    <p class="intro">Việt Nam sở hữu nhiều kỳ quan thiên nhiên được thế giới công nhận — từ vịnh biển, hang động đến núi cao và miền sông nước.</p>
+    <main class="grid" id="grid"></main>
+  </div>
+
+<script>
+  const wonders = [
+    { name: "Vịnh Hạ Long", img: "Ảnh/1-vinh-ha-long.jpg",
+      desc: "Gần 2.000 đảo đá vôi, Di sản thiên nhiên thế giới, thuộc Quảng Ninh." },
+    { name: "Hang Sơn Đoòng", img: "Ảnh/2-son-doong.jpg",
+      desc: "Hang động tự nhiên lớn nhất thế giới, thuộc Quảng Bình." },
+    { name: "Thác Bản Giốc", img: "Ảnh/3-thac-ban-gioc.jpg",
+      desc: "Thác nước đẹp nhất Việt Nam, nằm ở Cao Bằng." },
+    { name: "Fansipan", img: "Ảnh/4-fansipan.jpg",
+      desc: "“Mái nhà Đông Dương”, cao 3.147 m, thuộc Lào Cai." },
+    { name: "Đồng bằng sông Cửu Long", img: "Ảnh/5-mekong.jpg",
+      desc: "Vựa lúa, miệt vườn sông nước trù phú miền Nam." },
+    { name: "Động Phong Nha", img: "Ảnh/6-phong-nha.jpg",
+      desc: "Hệ thống hang động kỳ vĩ, Di sản thiên nhiên thế giới." }
+  ];
+
+  const grid = document.getElementById("grid");
+
+  wonders.forEach((w, i) => {
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const img = document.createElement("img");
+    img.src = w.img;
+    img.alt = w.name;
+    img.onerror = () => {
+      const box = document.createElement("div");
+      box.className = "img-error";
+      box.textContent = "Không tìm thấy ảnh: " + w.img;
+      img.replaceWith(box);
+    };
+
+    const info = document.createElement("div");
+    info.className = "info";
+    info.innerHTML = `<h3>${i + 1}. ${w.name}</h3><p>${w.desc}</p>`;
+
+    card.append(img, info);
+    grid.appendChild(card);
+  });
+</script>
+</body>
+</html>

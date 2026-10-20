@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài 15 - Máy tính</title>
+  <link rel="stylesheet" href="bai15.css">
+</head>
+<body>
+  <main class="calculator">
+    <section class="screen" aria-live="polite">
+      <div class="expression" id="expression"></div>
+      <div class="result" id="result">0</div>
+    </section>
+
+    <section class="keypad">
+      <button class="btn btn-clear" data-action="clear">C</button>
+      <button class="btn btn-op" data-action="paren">( )</button>
+      <button class="btn btn-op" data-value="%">%</button>
+      <button class="btn btn-op" data-value="÷">÷</button>
+
+      <button class="btn btn-num" data-value="7">7</button>
+      <button class="btn btn-num" data-value="8">8</button>
+      <button class="btn btn-num" data-value="9">9</button>
+      <button class="btn btn-op" data-value="×">×</button>
+
+      <button class="btn btn-num" data-value="4">4</button>
+      <button class="btn btn-num" data-value="5">5</button>
+      <button class="btn btn-num" data-value="6">6</button>
+      <button class="btn btn-op" data-value="−">−</button>
+
+      <button class="btn btn-num" data-value="1">1</button>
+      <button class="btn btn-num" data-value="2">2</button>
+      <button class="btn btn-num" data-value="3">3</button>
+      <button class="btn btn-op" data-value="+">+</button>
+
+      <button class="btn btn-num btn-zero" data-value="0">0</button>
+      <button class="btn btn-num" data-value=".">.</button>
+      <button class="btn btn-equal" data-action="equal">=</button>
+    </section>
+  </main>
+
+  <script>
+    const exprEl = document.getElementById('expression');
+    const resEl = document.getElementById('result');
+    let expr = '';
+    let justEvaluated = false;
+
+    const isOp = c => '+−×÷'.includes(c);
+
+    function evaluate(str) {
+      let i = 0;
+      const peek = () => str[i];
+
+      function parseExpr() {
+        let v = parseTerm();
+        while (peek() === '+' || peek() === '−') {
+          const op = str[i++];
+          const r = parseTerm();
+          v = op === '+' ? v + r : v - r;
+        }
+        return v;
+      }
+      function parseTerm() {
+        let v = parseFactor();
+        while (peek() === '×' || peek() === '÷') {
+          const op = str[i++];
+          const r = parseFactor();
+          if (op === '÷' && r === 0) throw new Error('div0');
+          v = op === '×' ? v * r : v / r;
+        }
+        return v;
+      }
+      function parseFactor() {
+        let v;
+        if (peek() === '−') { i++; return -parseFactor(); }
+        if (peek() === '(') {
+          i++;
+          v = parseExpr();
+          if (peek() === ')') i++;
+        } else {
+          const m = /^\d*\.?\d+|^\d+\.?/.exec(str.slice(i));
+          if (!m) throw new Error('syntax');
+          v = parseFloat(m[0]);
+          i += m[0].length;
+        }
+        while (peek() === '%') { i++; v /= 100; }
+        return v;
+      }
+
+      const out = parseExpr();
+      if (i < str.length) throw new Error('syntax');
+      return out;
+    }
+
+    function format(n) {
+      if (!isFinite(n)) return 'Lỗi';
+      return String(parseFloat(n.toPrecision(12)));
+    }
+
+    // Tự thêm ngoặc đóng còn thiếu để xem kết quả tạm
+    function closeParens(s) {
+      const open = (s.match(/\(/g) || []).length - (s.match(/\)/g) || []).length;
+      return s + ')'.repeat(Math.max(open, 0));
+    }
+
+    function render(finalResult) {
+      exprEl.textContent = expr;
+      if (finalResult !== undefined) { resEl.textContent = finalResult; return; }
+      if (!expr) { resEl.textContent = '0'; return; }
+      try {
+        let s = expr;
+        while (s && (isOp(s.slice(-1)) || s.slice(-1) === '(')) s = s.slice(0, -1);
+        if (!s) { resEl.textContent = '0'; return; }
+        resEl.textContent = format(evaluate(closeParens(s)));
+      } catch (e) { /* giữ nguyên kết quả cũ khi biểu thức chưa hoàn chỉnh */ }
+    }
+
+    function inputValue(v) {
+      const last = expr.slice(-1);
+      if (justEvaluated) {
+        // Sau dấu "=": gõ số thì bắt đầu phép mới, gõ phép tính thì tính tiếp từ kết quả
+        expr = (isOp(v) || v === '%') ? resEl.textContent : '';
+        justEvaluated = false;
+        if (expr === 'Lỗi') expr = '';
+      }
+      if (isOp(v)) {
+        if (!expr) { if (v === '−') expr = '−'; return render(); }
+        if (isOp(expr.slice(-1))) expr = expr.slice(0, -1);   // thay phép tính cuối
+        else if (expr.slice(-1) === '(' && v !== '−') return;
+        expr += v;
+      } else if (v === '%') {
+        if (!expr || isOp(last) || last === '(') return;
+        expr += v;
+      } else if (v === '.') {
+        const lastNum = expr.split(/[+−×÷()%]/).pop();
+        if (lastNum.includes('.')) return;
+        expr += lastNum === '' ? '0.' : '.';
+      } else {
+        if (last === ')' || last === '%') expr += '×';          // 2(3) → 2×(3)
+        expr += v;
+      }
+      render();
+    }
+
+    function inputParen() {
+      if (justEvaluated) { expr = ''; justEvaluated = false; }
+      const open = (expr.match(/\(/g) || []).length;
+      const close = (expr.match(/\)/g) || []).length;
+      const last = expr.slice(-1);
+      const canClose = open > close && last !== '' && !isOp(last) && last !== '(';
+      if (canClose) expr += ')';
+      else {
+        if (last && !isOp(last) && last !== '(') expr += '×';   // 5( → 5×(
+        expr += '(';
+      }
+      render();
+    }
+
+    function calculate() {
+      if (!expr) return;
+      try {
+        let s = expr;
+        while (s && (isOp(s.slice(-1)) || s.slice(-1) === '(')) s = s.slice(0, -1);
+        const r = format(evaluate(closeParens(s)));
+        expr = s;
+        render(r);
+        justEvaluated = true;
+      } catch (e) {
+        render(e.message === 'div0' ? 'Không chia được cho 0' : 'Lỗi');
+        justEvaluated = true;
+      }
+    }
+
+    function clearAll() { expr = ''; justEvaluated = false; render(); }
+
+    document.querySelector('.keypad').addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      const { action, value } = btn.dataset;
+      if (action === 'clear') clearAll();
+      else if (action === 'equal') calculate();
+      else if (action === 'paren') inputParen();
+      else inputValue(value);
+    });
+
+    // Hỗ trợ bàn phím
+    document.addEventListener('keydown', e => {
+      const k = e.key;
+      if (/^[0-9.]$/.test(k)) inputValue(k);
+      else if (k === '+') inputValue('+');
+      else if (k === '-') inputValue('−');
+      else if (k === '*') inputValue('×');
+      else if (k === '/') { e.preventDefault(); inputValue('÷'); }
+      else if (k === '%') inputValue('%');
+      else if (k === '(' || k === ')') inputParen();
+      else if (k === 'Enter' || k === '=') { e.preventDefault(); calculate(); }
+      else if (k === 'Backspace') { expr = expr.slice(0, -1); justEvaluated = false; render(); }
+      else if (k === 'Escape' || k.toLowerCase() === 'c') clearAll();
+    });
+
+    render();
+  </script>
+</body>
+</html>

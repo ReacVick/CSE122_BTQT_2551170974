@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .card-img-top{
+      height: 180px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body class="bg-light">
+  <div class="container py-4">
+    <h2 class="text-center text-danger mb-4">
+      Danh lam thang canh
+    </h2>
+
+    <div class="row g-3">
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <img src="Anh/Bai27/2-son-doong.jpg" class="card-img-top" alt="Hang Son Doong">
+          <div class=" card-body d-flex flex-column">
+           <h5 class="card-title">Hang Son Doong</h5>
+           <p class="card-text" >Hang dong tu nhien lon nhat the gioi.</p>
+           <button type="button" class="btn btn-danger mt-auto" data-bs-toggle="modal" data-bs-target="#modalChiTiet" data-ten="Hang Son Doong" data-mota="Hang dong tu nhien lon nhat the gioi, thuoc tinh Quang Binh.">
+           </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <img src="Anh/Bai27/5-mekong.jpg" class="card-img-top" alt="Dong bang song Cuu Long">
+          <div class=" card-body d-flex flex-column">
+           <h5 class="card-title">DBSCL</h5>
+           <p class="card-text" >Vua lua, miet lon song nuoc tru phu cua mien Nam</p>
+           <button type="button" class="btn btn-danger mt-auto" data-bs-toggle="modal" data-bs-target="#modalChiTiet" data-ten="Dong bang song Cuu Long" data-mota="Vua lua, miet lon song nuoc tru phu cua mien Nam">
+           </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <img src="Anh/Bai27/2-son-doong.jpg" class="card-img-top" alt="Dong Phong Nha">
+          <div class=" card-body d-flex flex-column">
+           <h5 class="card-title">Dong Phong Nha</h5>
+           <p class="card-text" >Hệ thống hang động kỳ vĩ, được công nhận là Di sản thiên nhiên thế giới.</p>
+           <button type="button" class="btn btn-danger mt-auto" data-bs-toggle="modal" data-bs-target="#modalChiTiet" data-ten="Dong Phong Nha" data-mota="Hệ thống hang động kỳ vĩ, được công nhận là Di sản thiên nhiên thế giới.">
+           </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion mt-4 " id="accordionDuLich">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#mucKinhNghiem">
+            Kinh nghiem du lich
+          </button>
+        </h2>
+        <div class="accordion-collapse collapse show" id="mucKinhNghiem" data-bs-parent="accordionDuLich">
+          <div class="accordion-body">
+            Chuan bi giay to, dat tour som, mang theo thuoc chong con trung.
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#mucChiPhi">
+            Chi phi du kien
+          </button>
+        </h2>
+        <div class="accordion-collapse collapse show" id="mucChiPhi" data-bs-parent="accordionDuLich">
+          <div class="accordion-body">
+            Khoang 3-5 trieu dong/nguoi cho tour 3 ngay 2 dem (chua gom mua sam ca nhan).
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+  <div class="modal fade" id="modalChiTiet" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalTieuDe">Tieu de</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Dong"></button>
+        </div>
+        <div class="modal-body" id="modalNoiDung">Noi dung</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Dong</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Dat ngay</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+
+  </script>
+
+  <script>
+    const modalChiTiet=document.getElementById('modalChiTiet');
+    modalChiTiet.addEventListener('show.bs.modal', function(event){
+      const nut=event.relatedTarget;
+
+      document.getElementById('modalTieuDe').textContent=nut.dataset.ten;
+      document.getElementById('modalNoiDung').textContent=nut.dataset.mota;
+    });
+  </script>
+</body>
+</html>

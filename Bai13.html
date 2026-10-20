@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài 13 - Đồng hồ số</title>
+    <link rel="stylesheet" href="Bai13.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="clock-box">
+            <img id="h1" src="Anh/Bai13/00.gif" alt="h1">
+            <img id="h2" src="Anh/Bai13/00.gif" alt="h2">
+            
+            <img src="Anh/Bai13/haicham.gif" alt="haicham">
+            
+            <img id="m1" src="Anh/Bai13/00.gif" alt="m1">
+            <img id="m2" src="Anh/Bai13/00.gif" alt="m2">
+            
+            <img src="Anh/Bai13/haicham.gif" alt="haicham">
+            
+            <img id="s1" src="Anh/Bai13/00.gif" alt="s1">
+            <img id="s2" src="Anh/Bai13/00.gif" alt="s2">
+        </div>
+
+        <div class="greeting-box">
+            <span id="lblLoiChoi">Chào buổi sáng</span>
+        </div>
+    </div>
+    <script>
+        function capNhatDongHo() {
+            let now = new Date();
+            let gio = now.getHours();
+            let phut = now.getMinutes();
+            let giay = now.getSeconds();
+
+            let strGio = String(gio).padStart(2, '0');
+            let strPhut = String(phut).padStart(2, '0');
+            let strGiay = String(giay).padStart(2, '0');
+            document.getElementById('h1').src = `Anh/Bai13/${String(strGio[0]).padStart(2, '0')}.gif`;
+            document.getElementById('h2').src = `Anh/Bai13/${String(strGio[1]).padStart(2, '0')}.gif`;
+            
+            document.getElementById('m1').src = `Anh/Bai13/${String(strPhut[0]).padStart(2, '0')}.gif`;
+            document.getElementById('m2').src = `Anh/Bai13/${String(strPhut[1]).padStart(2, '0')}.gif`;
+            
+            document.getElementById('s1').src = `Anh/Bai13/${String(strGiay[0]).padStart(2, '0')}.gif`;
+            document.getElementById('s2').src = `Anh/Bai13/${String(strGiay[1]).padStart(2, '0')}.gif`;
+
+            let loiChao = "";
+            if (gio >= 4 && gio < 11) {
+                loiChao = "Chào buổi sáng";
+            } else if (gio >= 11 && gio < 13) {
+                loiChao = "Chào buổi trưa";
+            } else if (gio >= 13 && gio < 18) {
+                loiChao = "Chào buổi chiều";
+            } else {
+                loiChao = "Chào buổi tối";
+            }
+            document.getElementById('lblLoiChoi').innerText = loiChao;
+        }
+
+        capNhatDongHo();
+        setInterval(capNhatDongHo, 1000);
+    </script>
+
+</body>
+</html>

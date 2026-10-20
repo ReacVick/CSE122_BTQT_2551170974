@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài 20 - Hiệu ứng ảnh</title>
+  <link rel="stylesheet" href="bai20.css">
+</head>
+<body>
+
+  <!-- Khung ảnh -->
+  <div class="frame">
+    <img id="photo" class="fx-gray" src="Anh/Bai20/hoahong.gif" alt="Hoa hồng">
+    <div class="caption">Special For You</div>
+  </div>
+
+  <!-- Thanh nút -->
+  <div class="toolbar" id="toolbar">
+    <button class="active" data-fx="fx-gray">Gray</button>
+    <button data-fx="fx-xray">Xray</button>
+    <button data-fx="fx-invert">Invert</button>
+    <button data-fx="fx-fliph">FlipH</button>
+    <button data-fx="fx-flipv">FlipV</button>
+    <button data-fx="fx-glow">Glow</button>
+    <button data-fx="fx-shadow">Shadow</button>
+    <button data-fx="fx-bold-shadow">Bold Shadow</button>
+    <button data-fx="fx-dropshadow">DropShadow</button>
+    <button data-fx="fx-blur">Blur</button>
+    <button data-fx="fx-wave">Wave</button>
+    <button data-fx="fx-mask">Mask</button>
+    <button data-fx="fx-alpha">Alpha</button>
+  </div>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <filter id="wave">
+      <feTurbulence id="turb" type="turbulence" baseFrequency="0.01 0.05" numOctaves="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </svg>
+
+  <script>
+    const photo   = document.getElementById('photo');
+    const toolbar = document.getElementById('toolbar');
+    
+    const turb    = document.getElementById('turb');
+    let timer = null;
+
+    toolbar.addEventListener('click', function (e) {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+
+      toolbar.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      photo.className = btn.dataset.fx;
+
+      clearInterval(timer);
+      if (btn.dataset.fx === 'fx-wave') {
+        let t = 0;
+        timer = setInterval(() => {
+          t += 0.02;
+          const fx = 0.01 + Math.sin(t) * 0.005;
+          turb.setAttribute('baseFrequency', fx + ' 0.05');
+        }, 50);
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bài 17 - Đăng ký tài khoản</title>
+  <link rel="stylesheet" href="bai17.css">
+</head>
+<body>
+  <form class="form-card" id="registerForm" novalidate>
+    <h1>Đăng ký tài khoản</h1>
+    <p class="subtitle">Dữ liệu được kiểm tra bằng JavaScript trước khi gửi.</p>
+
+    <div class="field">
+      <label for="fullname">Họ và tên</label>
+      <input type="text" id="fullname" name="fullname" autocomplete="name">
+      <div class="msg" id="fullname-msg"></div>
+    </div>
+
+    <div class="field">
+      <label for="email">Email</label>
+      <input type="text" id="email" name="email" autocomplete="email">
+      <div class="msg" id="email-msg"></div>
+    </div>
+
+    <div class="field">
+      <label for="password">Mật khẩu</label>
+      <input type="password" id="password" name="password" autocomplete="new-password">
+      <div class="msg" id="password-msg"></div>
+    </div>
+
+    <div class="field">
+      <label for="confirm">Xác nhận mật khẩu</label>
+      <input type="password" id="confirm" name="confirm" autocomplete="new-password">
+      <div class="msg" id="confirm-msg"></div>
+    </div>
+
+    <button type="submit" class="btn-submit">Đăng ký</button>
+    <p class="success" id="success" hidden>Đăng ký thành công!</p>
+  </form>
+
+  <script>
+    const form = document.getElementById('registerForm');
+    const fullname = document.getElementById('fullname');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const confirmPw = document.getElementById('confirm');
+    const success = document.getElementById('success');
+
+    const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    const rules = {
+      fullname: () => fullname.value.trim() === '' ? 'Họ và tên không được để trống' : '',
+      email: () => {
+        const v = email.value.trim();
+        if (v === '') return 'Email không được để trống';
+        if (!v.includes('@')) return 'Email không hợp lệ (thiếu @)';
+        if (v.endsWith('@') || !v.split('@')[1].includes('.')) return 'Email không hợp lệ (thiếu tên miền)';
+        return EMAIL_REGEX.test(v) ? '' : 'Email không hợp lệ';
+      },
+      password: () => password.value.length < 6 ? 'Mật khẩu phải có ít nhất 6 ký tự' : '',
+      confirm: () => {
+        if (confirmPw.value === '') return 'Vui lòng nhập lại mật khẩu';
+        return confirmPw.value !== password.value ? 'Mật khẩu xác nhận không khớp' : '';
+      }
+    };
+
+    const inputs = { fullname, email, password, confirm: confirmPw };
+    function validateField(name) {
+      const input = inputs[name];
+      const msg = document.getElementById(name + '-msg');
+      const error = rules[name]();
+
+      input.classList.remove('valid', 'invalid');
+      msg.classList.remove('error', 'ok');
+
+      if (error) {
+        input.classList.add('invalid');
+        msg.classList.add('error');
+        msg.textContent = '✗ ' + error;
+        return false;
+      }
+      input.classList.add('valid');
+      msg.classList.add('ok');
+      msg.textContent = '✓ Hợp lệ';
+      return true;
+    }
+
+    Object.keys(inputs).forEach(name => {
+      const input = inputs[name];
+      input.addEventListener('blur', () => {
+        if (input.value !== '') validateField(name);
+      });
+      input.addEventListener('input', () => {
+        success.hidden = true;
+        if (input.classList.contains('valid') || input.classList.contains('invalid')) {
+          validateField(name);
+        }
+        if (name === 'password' && confirmPw.value !== '') validateField('confirm');
+      });
+    });
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      let allValid = true;
+      Object.keys(inputs).forEach(name => {
+        if (!validateField(name)) allValid = false;
+      });
+
+      if (!allValid) {
+        success.hidden = true;
+        const firstInvalid = form.querySelector('.invalid');
+        if (firstInvalid) firstInvalid.focus();
+        return; // chặn gửi khi còn lỗi
+      }
+
+      success.hidden = false; // dữ liệu hợp lệ
+    });
+  </script>
+</body>
+</html>

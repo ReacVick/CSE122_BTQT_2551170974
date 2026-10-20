@@ -1,0 +1,174 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: #f3f4f6;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2937;
+}
+
+/* Thẻ ứng dụng */
+.app {
+  width: 100%;
+  max-width: 600px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(109, 40, 217, 0.18);
+  overflow: hidden;
+}
+
+/* Tiêu đề */
+.app-header {
+  padding: 24px 28px;
+  background: #6d28d9;
+  color: #ffffff;
+}
+
+.app-header h1 {
+  font-size: 26px;
+  margin-bottom: 6px;
+}
+
+.app-header p {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.app-body {
+  padding: 24px 28px 20px;
+}
+
+/* Ô nhập + nút Thêm */
+.add-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.add-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  font-size: 15px;
+  border: 1px solid #ddd6fe;
+  border-radius: 8px;
+  outline: none;
+}
+
+.add-row input:focus {
+  border-color: #6d28d9;
+  box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.15);
+}
+
+.btn-add {
+  padding: 0 24px;
+  background: #6d28d9;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  background: #5b21b6;
+}
+
+/* Danh sách việc */
+.task-list {
+  list-style: none;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px dashed #ede9fe;
+}
+
+/* Ô đánh dấu */
+.check {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  background: #ffffff;
+  border: 2px solid #a78bfa;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.check:focus-visible,
+.btn-add:focus-visible,
+.btn-delete:focus-visible {
+  outline: 2px solid #6d28d9;
+  outline-offset: 2px;
+}
+
+.task-text {
+  flex: 1;
+  font-size: 15px;
+  cursor: pointer;
+  word-break: break-word;
+}
+
+/* Khi đã hoàn thành */
+.task.done .check {
+  background: #6d28d9;
+  border-color: #6d28d9;
+}
+
+.task.done .check::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.task.done .task-text {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+/* Nút xoá */
+.btn-delete {
+  padding: 6px 12px;
+  background: #fde2e2;
+  color: #b91c1c;
+  font-size: 13px;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background: #fbcaca;
+}
+
+/* Số việc còn lại */
+.counter {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+@media (max-width: 480px) {
+  .app-header, .app-body { padding-left: 18px; padding-right: 18px; }
+  .app-header h1 { font-size: 22px; }
+}

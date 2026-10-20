@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #1f2937;
+  background: #ffffff;
+}
+.trang {
+  display: grid;
+  grid-template-columns: 200px 1fr 160px;
+  grid-template-areas:
+    "banner banner banner"
+    "menu   main   ads";
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+.banner {
+  grid-area: banner;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  background-color: #c62828;
+  background-image: url("Anh/Bai21/Nen_banner.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+}
+.banner img {
+  max-height: 60px;
+}
+.banner h1 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+.menu {
+  grid-area: menu;
+  background: linear-gradient(180deg, #c62828, #8e0000);
+}
+.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.menu a {
+  display: block;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+.menu a:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+.menu a.chon {
+  background: rgba(0, 0, 0, 0.25);
+  font-weight: bold;
+}
+.noidung {
+  grid-area: main;
+  padding: 20px 24px;
+  background: #ffffff;
+}
+.noidung h2 {
+  margin: 0 0 14px;
+  color: #c62828;
+  font-size: 1.5rem;
+}
+.menucon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 0 0 18px;
+  padding: 10px 16px;
+  list-style: none;
+  background: #ffe082;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+.menucon li::before {
+  content: "•";
+  margin-right: 6px;
+}
+.hopnoidung {
+  padding: 18px 22px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+.hopnoidung p {
+  margin: 0 0 14px;
+}
+.giua {
+  text-align: center;
+}
+.quangcao {
+  grid-area: ads;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+}
+.quangcao img {
+  max-width: 100%;
+}
+@media (max-width: 768px) {
+  .trang {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "banner"
+      "menu"
+      "main"
+      "ads";
+    grid-template-rows: auto;
+  }
+  .quangcao {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

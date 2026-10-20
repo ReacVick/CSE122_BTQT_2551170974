@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(180deg, #f5f7ff 0%, #eef0ff 100%);
+  color: #1e293b;
+  padding: 40px 16px;
+  min-height: 100vh;
+}
+
+/* Tiêu đề */
+.tieu-de {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.tieu-de h1 {
+  font-size: 30px;
+  color: #1e293b;
+}
+
+.tieu-de p {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* Lưới gói: 3 cột */
+.luoi-goi {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+/* Thẻ gói */
+.goi {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.goi:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.15);
+}
+
+/* Nhãn gói (bo tròn) */
+.nhan {
+  display: inline-block;
+  background: #eef2ff;
+  color: #4338ca;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.ten-goi {
+  margin-top: 14px;
+  font-size: 15px;
+  color: #334155;
+}
+
+/* Giá */
+.gia {
+  margin: 8px 0 18px;
+  font-size: 38px;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.gia small {
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: 400;
+  color: #64748b;
+}
+
+/* Danh sách quyền lợi */
+.quyen-loi {
+  list-style: none;
+  margin-bottom: 24px;
+}
+
+.quyen-loi li {
+  font-size: 12px;
+  color: #475569;
+  padding: 6px 0;
+}
+
+/* Nút */
+.nut {
+  display: block;
+  padding: 11px 0;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.nut:hover {
+  background: #e2e8f0;
+}
+
+/* Gói nổi bật: viền đậm, nâng lên, bóng đổ lớn */
+.goi.hot {
+  border: 2px solid #4f46e5;
+  padding-top: 36px;
+  padding-bottom: 36px;
+  transform: translateY(-12px);
+  box-shadow: 0 18px 36px rgba(79, 70, 229, 0.25);
+}
+
+.goi.hot:hover {
+  transform: translateY(-18px);
+  box-shadow: 0 24px 44px rgba(79, 70, 229, 0.32);
+}
+
+.goi.hot .gia {
+  font-size: 44px;
+}
+
+.goi.hot .quyen-loi li {
+  font-size: 13px;
+}
+
+.goi.hot .nut {
+  background: #4f46e5;
+  color: #ffffff;
+}
+
+.goi.hot .nut:hover {
+  background: #4338ca;
+}
+
+/* Responsive: màn hình nhỏ xếp 1 cột */
+@media (max-width: 760px) {
+  .luoi-goi {
+    grid-template-columns: 1fr;
+    max-width: 360px;
+  }
+
+  .goi.hot {
+    transform: none;
+  }
+
+  .goi.hot:hover {
+    transform: translateY(-6px);
+  }
+}
